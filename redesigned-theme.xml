@@ -917,7 +917,25 @@ padding-right: 3rem;
 }
 
 
-]]></b:skin>
+]]>
+/* Additional CSS for visual consistency */
+.sidebar .widget-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar .widget {
+    margin-bottom: 2rem;
+}
+
+.sidebar .widget input[type="text"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+}
+</b:skin>
 </b:if>
 <b:if cond='data:view.isLayoutMode'>
 <b:template-skin><![CDATA[
@@ -1253,7 +1271,64 @@ width: 50%;
       <b:widget-setting name='showReactions'>false</b:widget-setting>
     </b:widget-settings>
     <b:includable id='main' var='top'>
-      <b:include name='JetBlog'/>
+      <b:if cond='data:view.isHomepage'>
+        <div class='hero-section'>
+            <div class='container text-center'>
+                <h1 class='hero-title'>SyntaxLight</h1>
+                <p class='hero-subtitle'>Exploring the world of code, one line at a time.</p>
+            </div>
+        </div>
+        <div class='trending-section py-5'>
+            <div class='container'>
+                <h2 class='trending-title text-center mb-4'>Trending Posts</h2>
+                <div class='custom-posts' data-func='related_temp' data-label='trending' data-items='4' data-title='Trending'>
+                    <!-- Trending posts will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class='latest-posts-section py-5'>
+            <div class='container'>
+              <div class='d-lg-flex' id='main-content-home'>
+                <div class='col-lg-8' id='main-home'>
+                  <h2 class='latest-posts-title mb-4'>Latest Posts</h2>
+                  <div class='row'>
+                      <b:loop values='data:posts' var='post'>
+                          <div class='col-lg-6 mb-4'>
+                              <b:include data='post' name='JetArchive'/>
+                          </div>
+                      </b:loop>
+                  </div>
+                </div>
+                <div class='col-lg-4 ps-lg-4' id='sidebar-home'>
+                  <b:section class='pt-4' id='sidebar-static-home' itemscope='itemscope' showaddelement='yes'>
+                     <b:widget id='HTML19' locked='false' title='Recent Posts' type='HTML' visible='true'>
+                        <b:widget-settings>
+                          <b:widget-setting name='content'><![CDATA[<div data-title="Recent Posts" class="custom-posts visually-hidden" data-items="5" data-func="sidebar_temp"></div>]]></b:widget-setting>
+                        </b:widget-settings>
+                        <b:includable id='main'>
+                          <b:include name='JetHtml'/>
+                        </b:includable>
+                      </b:widget>
+                      <b:widget id='Label11' locked='false' title='Tags' type='Label' visible='true'>
+                        <b:widget-settings>
+                          <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+                          <b:widget-setting name='display'>CLOUD</b:widget-setting>
+                          <b:widget-setting name='selectedLabelsList'/>
+                          <b:widget-setting name='showType'>ALL</b:widget-setting>
+                          <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+                        </b:widget-settings>
+                        <b:includable id='main'>
+                          <b:include name='JetLabel'/>
+                        </b:includable>
+                      </b:widget>
+                  </b:section>
+                </div>
+              </div>
+            </div>
+        </div>
+      <b:else/>
+        <b:include name='JetBlog'/>
+      </b:if>
     </b:includable>
     <b:includable id='aboutPostAuthor'/>
     <b:includable id='addComments'/>
@@ -1489,71 +1564,69 @@ width: 50%;
 </div>
 <!--Main Content End-->
 
+
 <footer content='itemid' id='footer' itemid='#footer' itemscope='itemscope' itemtype='https://schema.org/WPFooter'>
 <div class='py-5 fs-7' id='footer-main'>
   <div class='container px-3'>
-    <b:section class='row row-cols-sm-2 row-cols-lg-4 justify-content-evenly' id='footer-widget' showaddelement='yes'>
-      <b:widget id='HTML21' locked='false' title='About Us' type='HTML' visible='true'>
-        <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies, sapien et auctor bibendum, magna urna posuere purus, at vehicula erat est ac sem.</p>]]></b:widget-setting>
-        </b:widget-settings>
-        <b:includable id='main'>
-      <b:include name='JetHtml'/>
-    </b:includable>
-      </b:widget>
-      <b:widget id='LinkList13' locked='false' title='Learn More' type='LinkList' version='2' visible='true'>
-        <b:widget-settings>
-          <b:widget-setting name='link-3'>https://jettheme-demo.blogspot.com/p/privacy-policy.html</b:widget-setting>
-          <b:widget-setting name='sorting'>NONE</b:widget-setting>
-          <b:widget-setting name='text-1'>Disclaimer</b:widget-setting>
-          <b:widget-setting name='link-1'>#</b:widget-setting>
-          <b:widget-setting name='text-0'>Advertise</b:widget-setting>
-          <b:widget-setting name='link-2'>https://www.jettheme.com/p/change-log.html</b:widget-setting>
-          <b:widget-setting name='text-3'>Privacy Policy</b:widget-setting>
-          <b:widget-setting name='link-0'>#</b:widget-setting>
-          <b:widget-setting name='text-2'>ChangeLog</b:widget-setting>
-        </b:widget-settings>
-        <b:includable id='main'>
-          <b:class name='ps-lg-5'/>
-      <b:include name='JetLinkList'/>
-    </b:includable>
-        <b:includable id='content'/>
-      </b:widget>
-      <b:widget id='LinkList14' locked='false' title='Follow Us' type='LinkList' version='2' visible='true'>
-        <b:widget-settings>
-          <b:widget-setting name='text-8'>github</b:widget-setting>
-          <b:widget-setting name='link-7'>#</b:widget-setting>
-          <b:widget-setting name='link-8'>#</b:widget-setting>
-          <b:widget-setting name='link-5'>#</b:widget-setting>
-          <b:widget-setting name='link-6'>#</b:widget-setting>
-          <b:widget-setting name='link-3'>#</b:widget-setting>
-          <b:widget-setting name='link-4'>#</b:widget-setting>
-          <b:widget-setting name='text-1'>tumblr</b:widget-setting>
-          <b:widget-setting name='text-0'>telegram</b:widget-setting>
-          <b:widget-setting name='text-3'>pinterest</b:widget-setting>
-          <b:widget-setting name='text-2'>linkedin</b:widget-setting>
-          <b:widget-setting name='text-5'>facebook</b:widget-setting>
-          <b:widget-setting name='text-4'>youtube</b:widget-setting>
-          <b:widget-setting name='text-7'>instagram</b:widget-setting>
-          <b:widget-setting name='text-6'>twitter</b:widget-setting>
-          <b:widget-setting name='sorting'>NONE</b:widget-setting>
-          <b:widget-setting name='link-1'>#</b:widget-setting>
-          <b:widget-setting name='link-2'>#</b:widget-setting>
-          <b:widget-setting name='link-0'>#</b:widget-setting>
-        </b:widget-settings>
-        <b:includable id='main'>
-          <b:include name='JetSocial'/>
-        </b:includable>
-        <b:includable id='content'/>
-      </b:widget>
-      <b:widget id='HTML22' locked='false' title='Newsletter' type='HTML' version='2' visible='true'>
-        <b:widget-settings>
-          <b:widget-setting name='content'>Stay up to date with the latest news and relevant updates from us.</b:widget-setting>
-        </b:widget-settings>
-        <b:includable id='main'>
-      <b:include name='JetFollowIt'/>
-    </b:includable>
-      </b:widget>
+    <b:section class='row' id='footer-widget' showaddelement='yes'>
+      <div class='col-lg-4 mb-4'>
+        <b:widget id='HTML21' locked='false' title='About Us' type='HTML' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='content'><![CDATA[<p>Exploring the world of code, one line at a time.</p>]]></b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+        <b:include name='JetHtml'/>
+      </b:includable>
+        </b:widget>
+      </div>
+      <div class='col-lg-8'>
+        <div class='row'>
+          <div class='col-md-4 mb-4'>
+            <b:widget id='LinkList13' locked='false' title='Learn More' type='LinkList' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='sorting'>NONE</b:widget-setting>
+                <b:widget-setting name='text-1'>About</b:widget-setting>
+                <b:widget-setting name='link-1'>/p/about.html</b:widget-setting>
+                <b:widget-setting name='text-0'>Contact</b:widget-setting>
+                <b:widget-setting name='link-0'>/p/contact.html</b:widget-setting>
+                <b:widget-setting name='text-2'>Sitemap</b:widget-setting>
+                <b:widget-setting name='link-2'>/p/sitemap.html</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <b:include name='JetLinkList'/>
+              </b:includable>
+              <b:includable id='content'/>
+            </b:widget>
+          </div>
+          <div class='col-md-4 mb-4'>
+            <b:widget id='LinkList14' locked='false' title='Follow Us' type='LinkList' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='sorting'>NONE</b:widget-setting>
+                <b:widget-setting name='text-0'>github</b:widget-setting>
+                <b:widget-setting name='link-0'>#</b:widget-setting>
+                <b:widget-setting name='text-1'>twitter</b:widget-setting>
+                <b:widget-setting name='link-1'>#</b:widget-setting>
+                <b:widget-setting name='text-2'>instagram</b:widget-setting>
+                <b:widget-setting name='link-2'>#</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <b:include name='JetSocial'/>
+              </b:includable>
+              <b:includable id='content'/>
+            </b:widget>
+          </div>
+          <div class='col-md-4 mb-4'>
+            <b:widget id='HTML22' locked='false' title='Newsletter' type='HTML' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='content'>Stay up to date with the latest news and relevant updates from us.</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+            <b:include name='JetFollowIt'/>
+          </b:includable>
+            </b:widget>
+          </div>
+        </div>
+      </div>
     </b:section>
   </div>
 </div>
@@ -1561,7 +1634,7 @@ width: 50%;
 <b:section class='container px-3' id='copyright' maxwidgets='1' showaddelement='no'>
   <b:widget id='HTML23' locked='true' title='Copyright' type='HTML' version='2' visible='true'>
     <b:widget-settings>
-      <b:widget-setting name='content'><![CDATA[Copyright &copy; 2022 BlogName. Design by <a href="https://www.jettheme.com">JetTheme.com</a>]]></b:widget-setting>
+      <b:widget-setting name='content'><![CDATA[Copyright &copy; 2024 SyntaxLight. All rights reserved.]]></b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
       <b:include name='JetCopyRight'/>
@@ -1570,6 +1643,7 @@ width: 50%;
 </b:section>
 </div>
 </footer>
+
 
 <div class='position-fixed d-none' id='back-to-top' style='right:20px;bottom:20px'><a aria-label='Back to Top' class='btn btn-sm jt-btn-light rounded-circle jt-icon-center' href='#back-to-top' onclick='window.scroll({top:0,left: 0,behavior:&apos;smooth&apos;});'><svg aria-hidden='true' class='jt-icon' height='1em' width='1em'><use href='#i-arrow-t'/></svg></a></div>
 
@@ -2179,67 +2253,38 @@ width: 50%;
 </b:if>
 </b:includable>
     <b:includable id='JetBlog'>
-    <b:if cond='data:view.isHomepage'>
-        <div class='hero-section'>
-            <div class='container text-center'>
-                <h1 class='hero-title'>SyntaxLight</h1>
-                <p class='hero-subtitle'>Exploring the world of code, one line at a time.</p>
-            </div>
-        </div>
-        <div class='trending-section py-5'>
-            <div class='container'>
-                <h2 class='trending-title text-center mb-4'>Trending Posts</h2>
-                <div class='custom-posts' data-func='related_temp' data-label='trending' data-items='4' data-title='Trending'>
-                    <!-- Trending posts will be loaded here -->
-                </div>
-            </div>
-        </div>
-        <div class='latest-posts-section py-5'>
-            <div class='container'>
-                <h2 class='latest-posts-title mb-4'>Latest Posts</h2>
-                <div class='row'>
-                    <b:loop values='data:posts' var='post'>
-                        <div class='col-lg-6 mb-4'>
-                            <b:include data='post' name='JetArchive'/>
-                        </div>
-                    </b:loop>
-                </div>
-            </div>
-        </div>
-    <b:else/>
-      <b:with value='(data:widgets where (w => w.type == data:widget.type and w.id == data:widget.instanceId )).first' var='jwidget'>
-        <b:if cond='data:view.isError OR data:numPosts == 0'>
-          <b:include name='JetBreadcrumbs'/>
-          <b:include name='Jet404'/>
+	<b:with value='(data:widgets where (w =&gt; w.type == data:widget.type and w.id == data:widget.instanceId )).first' var='jwidget'>
+      <b:if cond='data:view.isError OR data:numPosts == 0'>
+        <b:include name='JetBreadcrumbs'/>
+        <b:include name='Jet404'/>
         <b:elseif cond='data:view.isMultipleItems'/>
-          <b:include name='JetBreadcrumbs'/>
-          <div class='widget-content'>
-            <div class='row row-cols-sm-2' id='blog-content'>
-              <b:loop values='data:posts' var='post'>
-                <article class='item-post mb-4'>
-                  <b:include data='post' name='JetArchive'/>
-                </article>
-              </b:loop>
-            </div>
-            <b:include name='JetPagination'/>
+        <b:include name='JetBreadcrumbs'/>
+        <div class='widget-content'>
+          <div class='row row-cols-sm-2' id='blog-content'>
+            <b:loop values='data:posts' var='post'>
+              <article class='item-post mb-4'>
+                <b:include data='post' name='JetArchive'/>
+              </article>
+            </b:loop>
           </div>
+          <b:include name='JetPagination'/>
+        </div>
         <b:else/>
-          <b:loop values='data:posts' var='post'>
-            <b:if cond='data:view.isPost'>
-              <b:include data='post' name='JetBreadcrumbs'/>
-              <b:include data='post' name='JetPost'/>
-              <b:include name='JetPagination'/>
-              <b:include data='post' name='JetComments'/>
-              <b:include data='post' name='JetRelatedPost'/>
+        <b:loop values='data:posts' var='post'>
+          <b:if cond='data:view.isPost'>
+            <b:include data='post' name='JetBreadcrumbs'/>
+            <b:include data='post' name='JetPost'/>
+            <b:include name='JetPagination'/>
+            <b:include data='post' name='JetComments'/>
+            <b:include data='post' name='JetRelatedPost'/>
             <b:elseif cond='data:view.isPage'/>
-              <b:include data='post' name='JetPage'/>
-              <b:include data='post' name='JetComments'/>
-            </b:if>
-          </b:loop>
-       </b:if>
-      </b:with>
-    </b:if>
-</b:includable>
+            <b:include data='post' name='JetPage'/>
+            <b:include data='post' name='JetComments'/>
+          </b:if>
+        </b:loop>
+     </b:if>
+    </b:with>
+    </b:includable>
     <b:includable id='JetContactForm'>
       <b:include name='JetWidgetTitle'/>
       <div class='widget-content contact-form'>
@@ -2457,7 +2502,64 @@ width: 50%;
   </b:defaultmarkup>
   <b:defaultmarkup type='Blog'>
     <b:includable id='main' var='top'>
-      <b:include name='JetBlog'/>
+      <b:if cond='data:view.isHomepage'>
+        <div class='hero-section'>
+            <div class='container text-center'>
+                <h1 class='hero-title'>SyntaxLight</h1>
+                <p class='hero-subtitle'>Exploring the world of code, one line at a time.</p>
+            </div>
+        </div>
+        <div class='trending-section py-5'>
+            <div class='container'>
+                <h2 class='trending-title text-center mb-4'>Trending Posts</h2>
+                <div class='custom-posts' data-func='related_temp' data-label='trending' data-items='4' data-title='Trending'>
+                    <!-- Trending posts will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class='latest-posts-section py-5'>
+            <div class='container'>
+              <div class='d-lg-flex' id='main-content-home'>
+                <div class='col-lg-8' id='main-home'>
+                  <h2 class='latest-posts-title mb-4'>Latest Posts</h2>
+                  <div class='row'>
+                      <b:loop values='data:posts' var='post'>
+                          <div class='col-lg-6 mb-4'>
+                              <b:include data='post' name='JetArchive'/>
+                          </div>
+                      </b:loop>
+                  </div>
+                </div>
+                <div class='col-lg-4 ps-lg-4' id='sidebar-home'>
+                  <b:section class='pt-4' id='sidebar-static-home' itemscope='itemscope' showaddelement='yes'>
+                     <b:widget id='HTML19' locked='false' title='Recent Posts' type='HTML' visible='true'>
+                        <b:widget-settings>
+                          <b:widget-setting name='content'><![CDATA[<div data-title="Recent Posts" class="custom-posts visually-hidden" data-items="5" data-func="sidebar_temp"></div>]]></b:widget-setting>
+                        </b:widget-settings>
+                        <b:includable id='main'>
+                          <b:include name='JetHtml'/>
+                        </b:includable>
+                      </b:widget>
+                      <b:widget id='Label11' locked='false' title='Tags' type='Label' visible='true'>
+                        <b:widget-settings>
+                          <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+                          <b:widget-setting name='display'>CLOUD</b:widget-setting>
+                          <b:widget-setting name='selectedLabelsList'/>
+                          <b:widget-setting name='showType'>ALL</b:widget-setting>
+                          <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+                        </b:widget-settings>
+                        <b:includable id='main'>
+                          <b:include name='JetLabel'/>
+                        </b:includable>
+                      </b:widget>
+                  </b:section>
+                </div>
+              </div>
+            </div>
+        </div>
+      <b:else/>
+        <b:include name='JetBlog'/>
+      </b:if>
     </b:includable>
     <b:includable id='aboutPostAuthor'/>
     <b:includable id='addComments'/>
